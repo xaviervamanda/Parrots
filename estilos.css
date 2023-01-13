@@ -79,3 +79,7 @@ body{
     margin-top: 34px;
     margin-bottom: 153px; 
 }
+
+.escondido {
+  display: none;
+}
