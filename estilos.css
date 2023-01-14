@@ -87,3 +87,32 @@ body{
 .escondido {
   display: none;
 }
+
+@media (max-width:414px){
+  .tittle {
+    width: 312px;
+  }
+
+  .tittle h1 {    
+  font-size: 36px;
+  line-height: 42px;
+  text-align: center;
+  }
+
+  .line-cards{
+    flex-wrap: wrap;
+  }
+
+  .card{
+    margin-bottom: 34px;
+  }
+
+  .face {
+    width: 117px;
+    height: 146px;
+  }
+
+  .second, .last {
+    margin-top: 0px;
+  }
+}
