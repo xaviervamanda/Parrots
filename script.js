@@ -49,21 +49,27 @@ function inicioJogo (){
 inicioJogo();
 
 function inserirImagemAleatoria (){
-    const bancoImagensSeis = ['cogu.gif', 'cogu.gif', 'pessoa.gif', 'pessoa.gif', 'comendo-cogu.gif', 'comendo-cogu.gif'];
-    const bancoImagensSeis1 = ['cogu-rodando.gif', 'cogu-rodando.gif', 'crazy-cat.gif', 'crazy-cat.gif', 'cogu-vibe.gif', 'cogu-vibe.gif'];
-    const bancoImagensQuatro = ['cogu-urso.gif', 'cogu-urso.gif', 'pessoa.gif', 'pessoa.gif'];
-    const bancoImagensOito = ['cogu.gif', 'cogu.gif', 'pessoa.gif', 'pessoa.gif', 'comendo-cogu.gif', 'comendo-cogu.gif', 'cogu-chuva.gif', 'cogu-chuva.gif']
-    if (qntCartas === 4){
-        bancoImagensQuatro = bancoImagensQuatro.sort(comparador)
-        const listaDivs = document.querySelectorAll('.first .middle.back-face')
+    let bancoImagensSeis = ['cogu.gif', 'cogu.gif', 'pessoa.gif', 'pessoa.gif', 'comendo-cogu.gif', 'comendo-cogu.gif'];
+    let bancoImagensSeis1 = ['cogu-rodando.gif', 'cogu-rodando.gif', 'crazy-cat.gif', 'crazy-cat.gif', 'cogu-vibe.gif', 'cogu-vibe.gif'];
+    let bancoImagensQuatro = ['cogu-urso.gif', 'cogu-urso.gif', 'pessoa.gif', 'pessoa.gif'];
+    let bancoImagensOito = ['cogu.gif', 'cogu.gif', 'pessoa.gif', 'pessoa.gif', 'comendo-cogu.gif', 'comendo-cogu.gif', 'cogu-chuva.gif', 'cogu-chuva.gif'];
+    if (qntCartas === "4"){
+        bancoImagensQuatro = bancoImagensQuatro.sort(comparador);
+        const listaDivs = document.querySelectorAll('.first .middle.front-face');
         console.log(listaDivs);
-        for (i = 0; i < bancoImagensQuatro.length; i++){
+        for (let i = 0; i < bancoImagensQuatro.length; i++){
             listaDivs[i].innerHTML = `<img data-test="face-up-image" src="./img/${bancoImagensQuatro[i]}">`;
         }
-        //pegar as divs que tem classe middle na div com classe first
-        //adicionar o innerHTML com a imagem <img>
-        //<img data-test="face-up-image" src="./img/cogu.gif">
+    } if (qntCartas === "6"){
+        bancoImagensSeis = bancoImagensSeis.sort(comparador);
+        const listaDivs = document.querySelectorAll('.first .front-face');
+        for (let i = 0; i < bancoImagensSeis.length; i++){
+            listaDivs[i].innerHTML = `<img data-test="face-up-image" src="./img/${bancoImagensSeis[i]}">`;
+        }
     }
 }
 
 inserirImagemAleatoria();
+
+
+    
