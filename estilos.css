@@ -45,6 +45,10 @@ body{
   transform: rotateY(180deg);
 }
 
+.rotate-card-fixed {
+  transform: rotateY(180deg);
+}
+
 .front-face{
     transform: rotateY(180deg);
   }
