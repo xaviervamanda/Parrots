@@ -3,6 +3,8 @@ let cartaVirada;
 let primeiraCarta;
 let segundaCarta;
 let contadorJogadas = 0;
+let contadorTempo = 0;
+let tempo;
 
 function removeClasseEscondido (lista){
     for (let i = 0; i < lista.length; i++){
@@ -13,44 +15,6 @@ function removeClasseEscondido (lista){
 function comparador() { 
 	return Math.random() - 0.5; 
 }
-
-function inicioJogo (){
-    qntCartas = prompt ('Com quantas cartas você quer jogar? (Insira um número par de 4 a 14)');
-    
-    if (Number(qntCartas) % 2 === 0 && Number(qntCartas) >= 4 && Number(qntCartas) <= 14){
-        // adiciona qntCartas no site
-        if (qntCartas === "4"){
-            const qntCartasEscolhida = document.querySelectorAll('.first .middle');
-            removeClasseEscondido (qntCartasEscolhida);   
-        } if (qntCartas === "8"){
-            const qntCartasEscolhida = document.querySelectorAll('.first .middle');
-            const qntCartasEscolhida1 = document.querySelectorAll('.second .middle');
-            removeClasseEscondido (qntCartasEscolhida);
-            removeClasseEscondido (qntCartasEscolhida1);
-        } if (qntCartas === "6"){
-            const qntCartasEscolhida = document.querySelectorAll('.first .escondido');
-            removeClasseEscondido (qntCartasEscolhida);
-        } if (qntCartas === "10"){
-            const qntCartasEscolhida = document.querySelectorAll('.first .escondido');
-            const qntCartasEscolhida1 = document.querySelectorAll('.second .middle');
-            removeClasseEscondido (qntCartasEscolhida);
-            removeClasseEscondido (qntCartasEscolhida1);
-        } if (qntCartas === "12"){
-            const qntCartasEscolhida = document.querySelectorAll('.first .escondido');
-            const qntCartasEscolhida1 = document.querySelectorAll('.second .escondido');
-            removeClasseEscondido (qntCartasEscolhida);
-            removeClasseEscondido (qntCartasEscolhida1);
-        } if (qntCartas === "14"){
-            const qntCartasEscolhida = document.querySelectorAll('.escondido');
-            removeClasseEscondido (qntCartasEscolhida);
-        }
-    } else {
-        alert("Quantidade de cartas inválida!");
-        inicioJogo();
-}
-}
-
-inicioJogo();
 
 function inserirImagemAleatoria (){
     let bancoImagensSeis = ['cogu', 'cogu', 'pessoa', 'pessoa', 'comendo-cogu', 'comendo-cogu'];
@@ -121,10 +85,52 @@ function inserirImagemAleatoria (){
 
 inserirImagemAleatoria();
 
-/*function checaCartas(){
-    const atributoPrimeiraCarta = primeiraCarta.getAttribute('data-name');
-    const atributoSegundaCarta = segundaCarta.getAttribute('data-name');
-}*/
+function inicioJogo (){
+    
+    qntCartas = prompt ('Com quantas cartas você quer jogar? (Insira um número par de 4 a 14)');
+    inserirImagemAleatoria ();
+    tempo = setInterval (contaTempo, 1000)
+    if (Number(qntCartas) % 2 === 0 && Number(qntCartas) >= 4 && Number(qntCartas) <= 14){
+        // adiciona qntCartas no site
+        if (qntCartas === "4"){
+            const qntCartasEscolhida = document.querySelectorAll('.first .middle');
+            removeClasseEscondido (qntCartasEscolhida);   
+        } if (qntCartas === "8"){
+            const qntCartasEscolhida = document.querySelectorAll('.first .middle');
+            const qntCartasEscolhida1 = document.querySelectorAll('.second .middle');
+            removeClasseEscondido (qntCartasEscolhida);
+            removeClasseEscondido (qntCartasEscolhida1);
+        } if (qntCartas === "6"){
+            const qntCartasEscolhida = document.querySelectorAll('.first .escondido');
+            removeClasseEscondido (qntCartasEscolhida);
+        } if (qntCartas === "10"){
+            const qntCartasEscolhida = document.querySelectorAll('.first .escondido');
+            const qntCartasEscolhida1 = document.querySelectorAll('.second .middle');
+            removeClasseEscondido (qntCartasEscolhida);
+            removeClasseEscondido (qntCartasEscolhida1);
+        } if (qntCartas === "12"){
+            const qntCartasEscolhida = document.querySelectorAll('.first .escondido');
+            const qntCartasEscolhida1 = document.querySelectorAll('.second .escondido');
+            removeClasseEscondido (qntCartasEscolhida);
+            removeClasseEscondido (qntCartasEscolhida1);
+        } if (qntCartas === "14"){
+            const qntCartasEscolhida = document.querySelectorAll('.escondido');
+            removeClasseEscondido (qntCartasEscolhida);
+        }
+    } else {
+        alert("Quantidade de cartas inválida!");
+        inicioJogo();
+}
+}
+
+function contaTempo (){
+    contadorTempo++;
+    document.querySelector('.acrescentaTempo').innerHTML = `${contadorTempo} `;
+}
+
+inicioJogo();
+
+
 
 function virarCarta (carta){
     primeiraCarta = carta;
@@ -154,9 +160,28 @@ function virarCarta (carta){
     console.log (document.querySelectorAll('.rotate-card-fixed').length);
     console.log (contadorJogadas); 
     }if (Number(qntCartas) === document.querySelectorAll('.rotate-card-fixed').length){
-        setTimeout (() => {
-           alert (`Você ganhou em ${contadorJogadas} jogadas!`); 
-        }, 500);
-        
-    } 
+        setTimeout(restartJogo, 500);
+          
+    }
+     
+}
+
+function tiraClassesAntesInicioJogo (){
+    const viradas = document.querySelectorAll('.rotate-card-fixed');
+    for (let i = 0; i < viradas.length; i++){
+        viradas[i].classList.add ('escondido');
+        viradas[i].classList.remove ('rotate-card-fixed');
+    }
+}
+
+function restartJogo (){
+    clearInterval(tempo);
+    alert (`Você ganhou em ${contadorJogadas} jogadas! A duração do jogo foi de ${contadorTempo} segundos!`);
+    const resposta = prompt("Gostaria de jogar mais uma partida? (sim/não)");
+    if (resposta === "sim"){
+        tiraClassesAntesInicioJogo ();
+        contadorTempo = 0;
+        contadorJogadas = 0;
+        inicioJogo();
+    }   
 }
